@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bootstrap Website Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript">
+
+    $(document).ready(function () {
+        
+      $.ajax('http://rest.local/getData').done(function (response) {
+        console.log('response', response);
+
+        var txtTable = '<table class="table"><tr><th>APPLICANT_NAME</th><th>EMAIL_ID</th><th>CONTACT_NUMBER</th><th>EXPERIENCE_IN_MONTH</th><th>EXPERIENCE_IN_YEAR</th><th>LOCATION_ID</th><th colspan="2">ACTION</th></tr>';
+        for (let index = 0; index < response.length; index++) {
+          txtTable = txtTable + '<tr>';
+          txtTable = txtTable + '<td>' + response[index].APPLICANT_NAME + '</td>';
+          txtTable = txtTable + '<td>' + response[index].EMAIL_ID + '</td>';
+          txtTable = txtTable + '<td>' + response[index].CONTACT_NUMBER + '</td>';
+          txtTable = txtTable + '<td>' + response[index].EXPERIENCE_IN_MONTH + '</td>';
+          txtTable = txtTable + '<td>' + response[index].EXPERIENCE_IN_YEAR + '</td>';
+          txtTable = txtTable + '<td>' + response[index].LOCATION_ID + '</td>';
+          txtTable = txtTable + '<td><input id="btnUpdate'+index+'" type="button" class="btnUpdate" onclick="updateEmployee();" value="Update" /></td>';
+          txtTable = txtTable + '<td><input id="btnDelete'+index+'" type="button" class="btnDelete" onclick="deleteEmployee();" value="Delete" /></td>';
+          txtTable = txtTable + '</tr>';
+        }
+        txtTable = txtTable + '</table>';
+        //document.write(txtTable);
+        //document.getElementById('tblSPBorrowerTypes').innerHTML = txtTable;
+        $('#result').append(txtTable);
+
+      }).fail(function (errorResponse) {
+        console.log('errorResponse', errorResponse);
+      });
+    });
+
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">AIMBEYOND INFOTECH</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="file:///home/admin1/Desktop/Assignment/bootstrap_form.html#">HOME</a>
+          </li>
+          <li>
+            <a href="file:///home/admin1/Desktop/Assignment/Registration_form.html#">REGISTRATION</a>
+          </li>
+          <li>
+            <a href="#">CONTACT US</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">   
+   
+   
+   <h1>REGISTRATION FORM</h1><br/>
+    <form class="form-horizontal" role="form">
+
+      <div class="form-group">
+        <label for="APPLICANT NAME" class="col-sm-4 control-label">APPLICANT NAME</label>
+
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="name" placeholder="Enter your Name">
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="email address" class="col-sm-4 control-label">EMAIL ADDRESS</label>
+
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="email_id" placeholder="Enter your Email Address">
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="number" class="col-sm-4 control-label">CONTACT NUMBER</label>
+
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="contact_number" placeholder="Enter your Contact Number">
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="experience" class="col-sm-4 control-label">EXPERIENCE IN MONTH</label>
+
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="experience_month" placeholder="Experience in Month">
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="Experience" class="col-sm-4 control-label">EXPERIENCE IN YEAR</label>
+
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="experience_year" placeholder="Experience in Year">
+        </div>
+        <br/>
+        <br/>
+
+
+        <div class="form-group">
+
+          <label for="lastname" class="col-sm-4 control-label">LOCATION_NAME</label>
+
+          <div class="col-sm-6">
+
+            <select class="form-control" name="dropdown" id="loaction_name">
+
+
+              <option value="0" selected>Select City</option>
+
+              <option value="1">DELHI </option>
+
+              <option value="2">NOIDA </option>
+
+              <option value="3">GHAZIABAD </option>
+
+              <option value="4">CHANDIGARH </option>
+
+              <option value="5">GURUGRAM</option>
+
+              <option value="6">PUNE </option>
+
+              <option value="7">MUMBAI </option>
+
+              <option value="8">BANGALORE </option>
+
+              <option value="9">CHENNAI </option>
+
+              <option value="10">JAIPUR </option>
+
+              <option value="11">ANDRA PRADESH</option>
+
+              <option value="12">HYDERABAD </option>
+
+              <option value="13">GREATER NOIDA </option>
+
+              <option value="14">GUJRAT </option>
+
+              <option value="15">JAMMU </option>
+
+
+            </select>
+
+
+          </div>
+
+        </div>
+      
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" id="sub" class="btn btn-default" onclick="">SUBMIT</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="footer">
+            <p>COPYRIGHT © 2018 </p>
+          </div>
+      </body>
+      
+      </html>
+      <style>
+        .container {
+          text-align: center;
+          border: 3px solid;
+          padding-bottom: 0px;
+      
+        }
+      
+        .footer {
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          background-color: black;
+          text-align: center;
+          color: aliceblue;
+        }
+
+        </style>
